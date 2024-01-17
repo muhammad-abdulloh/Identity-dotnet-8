@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +16,7 @@ namespace Identity8
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
             builder.Services.AddDbContext<IdentityDbContext>(options => options.UseInMemoryDatabase("IdentityDb"));
             builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
             builder.Services.AddAuthorizationBuilder();
@@ -24,7 +24,6 @@ namespace Identity8
             builder.Services.AddIdentityCore<IdentityUser>()
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddApiEndpoints();
-
 
             var app = builder.Build();
 
@@ -34,6 +33,7 @@ namespace Identity8
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
             app.MapIdentityApi<IdentityUser>();
             app.MapGet("welcome", () => "Salom bolajonim")
                 .RequireAuthorization();
